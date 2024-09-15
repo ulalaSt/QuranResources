@@ -20,8 +20,7 @@ cursor.execute('''
     CREATE TABLE IF NOT EXISTS quran_words (
         id INTEGER PRIMARY KEY,
         surah INTEGER,
-        ayah INTEGER,
-        text TEXT
+        ayah INTEGER
     )
 ''')
 
@@ -53,9 +52,9 @@ with open(position_json, 'r', encoding='utf-8') as f_pos, open(arabic_json, 'r',
         ayah = info['ayah']
         text = arabic_words[word_id]
         cursor.execute('''
-            INSERT INTO quran_words (id, surah, ayah, text)
-            VALUES (?, ?, ?, ?)
-        ''', (int(word_id), surah, ayah, text))
+            INSERT INTO quran_words (id, surah, ayah)
+            VALUES (?, ?, ?)
+        ''', (int(word_id), surah, ayah))
 
 # Create tables for each translation and insert data
 create_translation_table('kk')
